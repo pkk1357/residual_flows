@@ -1,0 +1,30 @@
+data:
+  name: cifar
+  batch_size: 128
+  num_workers: 4
+  shuffle: true
+  normalize: true
+
+model:
+  hidden_channels: 256    # 각 ResidualBlock의 hidden dimension
+  num_blocks: 8          # Residual Flow의 블록 수
+  input_shape: [3, 32, 32]  # CIFAR-10 입력 형태
+
+training:
+  epochs: 100
+  lr: 0.001
+  weight_decay: 1e-5
+  save_path: "./checkpoints/"
+  log_interval: 100      # 로그 출력 간격
+  save_interval: 10      # 모델 저장 간격
+
+# 추가 설정
+optimization:
+  scheduler: "cosine"    # learning rate scheduler
+  warmup_epochs: 5      # warmup 에포크
+  min_lr: 1e-6         # 최소 learning rate
+
+logging:
+  use_wandb: false      # Weights & Biases 로깅
+  project_name: "residual_flow"
+  experiment_name: "cifar10_flow"
